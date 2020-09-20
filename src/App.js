@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+  Redirect
+} from "react-router-dom";
+import Game from './Components/Game'
+import Addplayer from './Components/Addplayer'
 
-function App() {
+
+
+export default function App() {
+
+  const history = useHistory();
+
+  const routeChange = () =>{ 
+    let path = `/Components/Game`; 
+    history.push(path);
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Addplayer />
+    </>
   );
 }
-
-export default App;

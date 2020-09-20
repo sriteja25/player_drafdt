@@ -7,46 +7,65 @@ import {
 } from "react-router-dom";
 import * as ReactBootStrap from 'react-bootstrap'
 import Players from '../Jsons/Players.json'
+import MaterialTable from 'material-table'
 
 
 export default function Home() {
 
 
-    const players = Players
-    // const players = [
-
-    //     // { Position: "FWD", Name: "Messi", Club: "Barcelona", Nationality: "Argentina", Age: "32" },
-    //     // { Position: "FWD", Name: "Messi", Club: "Barcelona", Nationality: "Argentina", Age: "32" },
-    //     // { Position: "FWD", Name: "Messi", Club: "Barcelona", Nationality: "Argentina", Age: "32" },
-    //     // { Position: "FWD", Name: "Messi", Club: "Barcelona", Nationality: "Argentina", Age: "32" },
-    //     // { Position: "FWD", Name: "Messi", Club: "Barcelona", Nationality: "Argentina", Age: "32" }
-
-    // ]
+    var arr = []
 
     const renderPlayer = (player, index) => {
+        arr.push(player)
 
-        console.log(player)
+        
+        // generateTable()
+
+    }
+
+    const columns = [
+
+        { title: "Id", field: "Id" },
+        { title: "Name", field: "Name" },
+        { title: "Rating", field: "Rating" },
+        { title: "Position", field: "Position" },
+        { title: "Club", field: "Club" },
+        { title: "Nationality", field: "Nationality" },
+        { title: "Age", field: "Age" }
+    ]
+
+    const generateTable = () => {
+
+        console.log(Players)
+
+        arr = arr.filter(function (obj) {
+            return obj.Id !== "1203";
+        });
+
 
         return (
-            <>
-                <tr key={index}>
-                    <td>{player.Id}</td>
-                    <td>{player.Name}</td>
-                    <td>{player.Rating}</td>
-                    <td>{player.Position}</td>
-                    <td>{player.Club}</td>
-                    <td>{player.Nationality}</td>
-                    <td>{player.Age}</td>
-                </tr>
-            </>
-        )
 
+            <MaterialTable title="All players table"
+
+                data={arr}
+                columns={columns}
+                options={{
+                    search: true,
+                    filtering: true,
+                    sorting: true
+                }
+                }
+            />
+        )
     }
 
     return (
 
         <>
-            <ReactBootStrap.Table striped bordered hover>
+
+            {Players.map(renderPlayer)}
+            {generateTable()}
+            {/* <ReactBootStrap.Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -61,7 +80,7 @@ export default function Home() {
                 <tbody>
                     {Players.map(renderPlayer)}
                 </tbody>
-            </ReactBootStrap.Table>
+            </ReactBootStrap.Table> */}
 
         </>
     )
